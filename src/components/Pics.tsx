@@ -6,11 +6,21 @@ import useElements from '../hooks/useElements'
 
 
 const Pics: React.FC = () => {
-  const roots: any[] = useElements('rmwidget widget-picture draggable dragging')
+  const roots: any[] = [
+    // ...useElements('rmwidget widget-picture draggable'),
+    ...useElements('draggable', () => {}, true)
+  ]
+  console.log(roots)
 
-  const renderPic = (root: HTMLElement) =>
+  const renderPic = (root: HTMLElement, index: number) =>
     <div
+      key={index}
       className='Pic'
+      // onClick={e => {
+      //   if (e.type === 'contextmenu')
+      //     e.stopPropagation()
+      // }}
+      // onClick={e => console.log(e.type)}
     >
       <div
         className='Pic__close'
@@ -24,7 +34,7 @@ const Pics: React.FC = () => {
       // .filter(elem => !elem.classList.contains('mapped'))
       .map(root =>
         createPortal(
-          renderPic(root),
+          renderPic(root, root.dataset['data-id']),
           root
         )
       )}

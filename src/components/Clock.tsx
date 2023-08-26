@@ -9,8 +9,8 @@ import useElements from '../hooks/useElements'
 
 const Clock: React.FC = () => {
   const now = useNow()
-  const roots = useElements('svg-scale-wrapper')
-  const width = roots.length > 0 ? roots[0].getBoundingClientRect().width : 0
+  const roots = useElements('svg above-all-fade fade-in')
+  const height = roots.length > 0 ? roots[0].getBoundingClientRect().height : 0
 
   const renderClock = () =>
     <div
@@ -19,8 +19,8 @@ const Clock: React.FC = () => {
         fontFamily: 'custom_85891',
         fontWeight: 400,
         fontStyle: 'normal',
-        fontSize: `${width / 2}px`,
-        lineHeight: `${width / 1.2}px`,
+        fontSize: `${height / 2}px`,
+        lineHeight: `${height / 1.2}px`,
       }}
     >
       {format(now, 'm-dd-MM-yyyy')}
