@@ -1,8 +1,5 @@
-import React from 'react'
-
-import { createPortal } from 'react-dom'
-
 import Clock from './components/Clock'
+import Pics from './components/Pics'
 
 import './assets/styles/index.sass'
 
@@ -12,6 +9,7 @@ const App = () => {
   return (
     <div className='App'>
       <Clock />
+      <Pics />
     </div>
   )
 }

@@ -4,24 +4,12 @@ import { createPortal } from 'react-dom'
 import { format } from 'date-fns'
 
 import useNow from '../hooks/useNow'
-
-
-const wrapperName = 'svg-scale-wrapper'
+import useElements from '../hooks/useElements'
 
 
 const Clock: React.FC = () => {
   const now = useNow()
-  const [root, setRoot] = React.useState<any>(null)
-
-  React.useEffect(() => {
-    const wrappers = Array.from(
-      document.getElementsByClassName(wrapperName)
-    )
-    if (wrappers.length > 0)
-      setRoot(wrappers[0])
-    else
-      console.log(`no node with class ${wrapperName}`)
-  }, [])
+  const roots = useElements('svg-scale-wrapper')
 
   const renderClock = () =>
     <div
@@ -36,10 +24,10 @@ const Clock: React.FC = () => {
       {format(now, 'dd-MM-yyyy')}
     </div>
 
-  return root ?
+  return roots.length > 0 ?
     createPortal(
       renderClock(),
-      root
+      roots[0]
     )
     :
     <div />

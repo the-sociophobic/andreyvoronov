@@ -2,22 +2,11 @@ import React from 'react'
 
 import { createPortal } from 'react-dom'
 
-
-const wrapperName = 'rmwidget widget-picture draggable dragging'
+import useElements from '../hooks/useElements'
 
 
 const Pics: React.FC = () => {
-  const [roots, setRoots] = React.useState<any[]>([])
-
-  React.useEffect(() => {
-    const wrappers = Array.from(
-      document.getElementsByClassName(wrapperName)
-    )
-    if (wrappers.length > 0)
-      setRoots(wrappers)
-    else
-      console.log(`no node with class ${wrapperName}`)
-  }, [])
+  const roots: any[] = []//useElements('rmwidget widget-picture draggable dragging')
 
   const renderPic = (root: HTMLElement) =>
     <div
@@ -30,12 +19,14 @@ const Pics: React.FC = () => {
     </div>
 
   return roots.length > 0 ?
-    roots.map(root =>
-      createPortal(
-        renderPic(root),
-        root
-      )
-    )
+    <>
+      {roots.map(root =>
+        createPortal(
+          renderPic(root),
+          root
+        )
+      )}
+    </>
     :
     <div />
 }
