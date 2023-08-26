@@ -21,7 +21,7 @@ const Clock: React.FC = () => {
         fontSize: '25px'
       }}
     >
-      {format(now, 'dd-MM-yyyy')}
+      {format(now, 'm-dd-MM-yyyy')}
     </div>
 
   return roots.length > 0 ?
