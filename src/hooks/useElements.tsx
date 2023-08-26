@@ -5,12 +5,12 @@ import useCounter from './useTimeout'
 const max_counter = 7
 
 
-const useElements = (className: string) => {
+const useElements = (className: string, onFound?: () => void) => {
   const [elements, setElements] = useState<any[]>([])
 
   useCounter({
     delta: 300,
-    max_counter,
+    // max_counter,
     onStop: () => { console.log(`elements of class ${className} weren't found after ${max_counter} tries`) },
     onCount: () => {
       if (elements.length > 0)

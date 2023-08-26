@@ -6,7 +6,7 @@ import useElements from '../hooks/useElements'
 
 
 const Pics: React.FC = () => {
-  const roots: any[] = []//useElements('rmwidget widget-picture draggable dragging')
+  const roots: any[] = useElements('rmwidget widget-picture draggable dragging')
 
   const renderPic = (root: HTMLElement) =>
     <div
@@ -20,12 +20,15 @@ const Pics: React.FC = () => {
 
   return roots.length > 0 ?
     <>
-      {roots.map(root =>
+      {roots
+      // .filter(elem => !elem.classList.contains('mapped'))
+      .map(root =>
         createPortal(
           renderPic(root),
           root
         )
       )}
+      <div />
     </>
     :
     <div />

@@ -10,6 +10,7 @@ import useElements from '../hooks/useElements'
 const Clock: React.FC = () => {
   const now = useNow()
   const roots = useElements('svg-scale-wrapper')
+  const width = roots.length > 0 ? roots[0].getBoundingClientRect().width : 0
 
   const renderClock = () =>
     <div
@@ -18,7 +19,8 @@ const Clock: React.FC = () => {
         fontFamily: 'custom_85891',
         fontWeight: 400,
         fontStyle: 'normal',
-        fontSize: '25px'
+        fontSize: `${width / 2}px`,
+        lineHeight: `${width / 1.2}px`,
       }}
     >
       {format(now, 'm-dd-MM-yyyy')}
