@@ -6,7 +6,7 @@ body
   color: white
   background-color: black
   position: absolute
-  top: 50% !important
+  top: 54% !important
   left: 50% !important
   width : unset !important
   height : unset !important
@@ -14,19 +14,30 @@ body
   padding-left: 17px
   padding-right: 17px
   
-.Pic
+// .Pic
+//   position: absolute
+//   top: 0
+//   left: 0
+//   width: 100%
+//   height: 100%
+//   cursor: grab
+.rmwidget.widget-picture .Pic__close
   position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-  cursor: grab
-  &__close
-    position: absolute
-    top: 2%
-    right: 2%
-    width: 5%
-    height: 5%
-    cursor: pointer
+  top: 7px !important
+  right: 7px !important
+  left: unset !important
+  width: 25px !important
+  height: 25px !important
+  cursor: pointer
 .d-none
   display: none !important
+
+
+a.visited
+  text-decoration: line-through
+
+.draggable img
+  pointer-events: none !important
+
+// a.link-1
+//   color: white

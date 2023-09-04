@@ -11,7 +11,7 @@ const useElements = (className: string, onFound?: () => void, endless?: boolean)
   useCounter({
     delta: 300,
     // max_counter,
-    onStop: () => { console.log(`elements of class ${className} weren't found after ${max_counter} tries`) },
+    // onStop: () => { console.log(`elements of class ${className} weren't found after ${max_counter} tries`) },
     onCount: () => {
       if (elements.length > 0 && !endless)
         return
@@ -20,7 +20,7 @@ const useElements = (className: string, onFound?: () => void, endless?: boolean)
         document.getElementsByClassName(className)
       ))
 
-      console.log(`found ${elements.length} elements of class ${className}`)
+      // console.log(`found ${elements.length} elements of class ${className}`)
     }
   })
   

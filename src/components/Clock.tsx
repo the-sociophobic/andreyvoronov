@@ -7,8 +7,11 @@ import useNow from '../hooks/useNow'
 import useElements from '../hooks/useElements'
 
 
+const initial_date = 946695600
+
+
 const Clock: React.FC = () => {
-  const now = useNow()
+  const time_distance = useNow() - initial_date
   const roots = useElements('svg above-all-fade fade-in')
   const height = roots.length > 0 ? roots[0].getBoundingClientRect().height : 0
 
@@ -20,12 +23,14 @@ const Clock: React.FC = () => {
         fontWeight: 400,
         fontStyle: 'normal',
         fontSize: `${height / 2}px`,
+        // fontSize: `20px`,
         lineHeight: `${height / 1.2}px`,
       }}
     >
-      {format(now, 'm-dd-MM-yyyy')}
+      {format(time_distance, 'ss-mm-dd-MM-yy')}
     </div>
 
+    // return renderClock()
   return roots.length > 0 ?
     createPortal(
       renderClock(),
