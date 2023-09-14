@@ -24,7 +24,7 @@ const Clock: React.FC = () => {
         fontStyle: 'normal',
         fontSize: `${height / 2}px`,
         // fontSize: `20px`,
-        lineHeight: `${height / 1.2}px`,
+        lineHeight: `${height / 1.4}px`,
       }}
     >
       {format(time_distance, 'ss-mm-dd-MM-yy')}
