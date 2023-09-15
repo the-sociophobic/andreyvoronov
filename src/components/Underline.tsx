@@ -1,6 +1,7 @@
 import React from 'react'
 
 import useElements from '../hooks/useElements'
+import useTimeout from '../hooks/useTimeout'
 
 
 const hashElem = (elem: any) =>
@@ -14,14 +15,28 @@ const getLinkHashes = () =>
   JSON.parse(localStorage.getItem('visitedLinks') || '[]')
 
 const setLinkHashes = (array: (number | string)[]) =>
-  localStorage.setItem('visitedLinks', '[' + array.toString() + ']')
+  localStorage.setItem('visitedLinks', ('[' + array.toString() + ']').replace(',]', ']'))
 
 
 const Underline: React.FC = () => {
-  const linkClasses = ['link-1', 'maglink']
-  const [visitedLinks, setVisitedLinks] = React.useState(getLinkHashes())
+  useTimeout({
+    delta: 100,
+    onCount: () => {
+      const pageFromHref = window.location.href.replace('?init', '').split('/').slice(-1)[0] || window.location.href.replace('?init', '').split('/').slice(-2)[0]
+      const currentPage = parseInt(pageFromHref) - 16
+      const visitedLinks = getLinkHashes()
 
-  const linkElements = useElements('link-1 maglink', () => { }, true)
+      setLinkHashes([
+        currentPage,
+        visitedLinks.filter((link: any) => link + '' !== currentPage + '')
+      ])
+    }
+  })
+
+  const linkClasses = ['link-1', 'maglink']
+  const visitedLinks = getLinkHashes()
+
+  const linkElements = useElements('link-1 maglink', () => {}, true)
     .filter(link => visitedLinks.includes(
       hashElem(link)
     ))
@@ -34,28 +49,20 @@ const Underline: React.FC = () => {
     if (isAffectedLink) {
       const clickedLink = hashElem(e.target)
 
-      // setVisitedLinks([
-      //   clickedLink,
-      //   ...visitedLinks.filter((link: string | number) => link + '' !== clickedLink + '')
-      // ])
-      // setTimeout(() => {
-        setLinkHashes([
-          clickedLink,
-          ...visitedLinks.filter((link: string | number) => link + '' !== clickedLink + '')  
-        ])
-        console.log(clickedLink)
-        console.log(getLinkHashes())
-      // }, 10)
-
-      // console.log(getLinkHashes())
+      setLinkHashes([
+        clickedLink,
+        ...visitedLinks.filter((link: string | number) => link + '' !== clickedLink + '')
+      ])
+      console.log(clickedLink)
+      console.log(getLinkHashes())
     }
   }
 
-  React.useEffect(() => {
-    window.addEventListener('mousedown', storeVisitedLink)
+  // React.useEffect(() => {
+  //   window.addEventListener('mousedown', storeVisitedLink)
 
-    return () => window.removeEventListener('click', storeVisitedLink)
-  }, [])
+  //   return () => window.removeEventListener('click', storeVisitedLink)
+  // }, [])
 
   React.useEffect(() => {
     linkElements
