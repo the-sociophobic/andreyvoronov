@@ -11,8 +11,18 @@ const hashElem = (elem: any) =>
       .replace(/[^0-9]/g, '')
   )
 
-const getLinkHashes = () =>
-  JSON.parse(localStorage.getItem('visitedLinks') || '[]')
+const getLinkHashes = () => {
+  let res = []
+
+  try {
+    res = JSON.parse(localStorage.getItem('visitedLinks') || '[]')
+  } catch {
+    res = []
+    localStorage.setItem('visitedLinks', '[]')
+  }
+
+  return res
+}
 
 const setLinkHashes = (array: (number | string)[]) =>
   localStorage.setItem('visitedLinks', ('[' + array.toString() + ']').replace(',]', ']'))
