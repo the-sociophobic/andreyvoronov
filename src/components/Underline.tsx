@@ -43,7 +43,6 @@ const Underline: React.FC = () => {
     }
   })
 
-  const linkClasses = ['link-1', 'maglink']
   const visitedLinks = getLinkHashes()
 
   const linkElements = useElements('link-1 maglink', () => {}, true)
@@ -51,40 +50,17 @@ const Underline: React.FC = () => {
       hashElem(link)
     ))
 
-  const storeVisitedLink = (e: MouseEvent) => {
-    const isAffectedLink = linkClasses.every(className =>
-      (e.target as Element).classList.contains(className))
-      && (e.target as Element).innerHTML.includes('.')
-
-    if (isAffectedLink) {
-      const clickedLink = hashElem(e.target)
-
-      setLinkHashes([
-        clickedLink,
-        ...visitedLinks.filter((link: string | number) => link + '' !== clickedLink + '')
-      ])
-      console.log(clickedLink)
-      console.log(getLinkHashes())
-    }
-  }
-
-  // React.useEffect(() => {
-  //   window.addEventListener('mousedown', storeVisitedLink)
-
-  //   return () => window.removeEventListener('click', storeVisitedLink)
-  // }, [])
-
   React.useEffect(() => {
     linkElements
-      .forEach(link => link.classList.remove('visited'))
+      .forEach(link => link.classList.remove('visited', 'current'))
 
-    // console.log(linkElements
-    //   .filter(link => hashElem(link) + '' !== visitedLinks[0] + '')
-    //   .map(link => hashElem(link))
-    // )
     linkElements
       .filter(link => hashElem(link) + '' !== visitedLinks[0] + '')
       .forEach(link => link.classList.add('visited'))
+
+    linkElements
+      .filter(link => hashElem(link) + '' === visitedLinks[0] + '')
+      .forEach(link => link.classList.add('current'))
   }, [linkElements])
 
   return <div />

@@ -9,9 +9,9 @@ const App = () => {
 
   return (
     <div className='App'>
-      <Clock />
       <Pics />
       <Underline />
+      <Clock />
     </div>
   )
 }

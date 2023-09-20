@@ -33,8 +33,11 @@ body
   display: none !important
 
 
-a.visited
-  text-decoration: line-through
+a
+  &.visited
+    text-decoration: line-through
+  &.current
+    color: rgba(72, 171, 177, 1) !important
 
 .draggable img
   pointer-events: none !important
